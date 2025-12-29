@@ -14,9 +14,11 @@ export default function Header() {
                     <nav className="hidden md:flex gap-2 items-center">
                         <NavLink to="/launches" className={({ isActive }) => linkClass(isActive)}>Launches</NavLink>
                         <NavLink to="/rockets" className={({ isActive }) => linkClass(isActive)}>Rockets</NavLink>
-                        <NavLink to="/missions" className={({ isActive }) => linkClass(isActive)}>Missions</NavLink>
-                        <NavLink to="/about" className={({ isActive }) => linkClass(isActive)}>About</NavLink>
+                        <NavLink to="/ships" className={({ isActive }) => linkClass(isActive)}>Ships</NavLink>
+                        <NavLink to="/statistics" className={({ isActive }) => linkClass(isActive)}>Statistics</NavLink>
+                        <NavLink to="/history" className={({ isActive }) => linkClass(isActive)}>History</NavLink>
                         <NavLink to="/users" className={({ isActive }) => linkClass(isActive)}>Users</NavLink>
+                        <NavLink to="/about" className={({ isActive }) => linkClass(isActive)}>About</NavLink>
                     </nav>
                 </div>
 
@@ -42,10 +44,11 @@ export default function Header() {
                     <nav className="px-2 py-3 space-y-1">
                         <NavLink to="/launches" onClick={() => setOpen(false)} className={({ isActive }) => linkClass(isActive)}>Launches</NavLink>
                         <NavLink to="/rockets" onClick={() => setOpen(false)} className={({ isActive }) => linkClass(isActive)}>Rockets</NavLink>
-                        <NavLink to="/missions" onClick={() => setOpen(false)} className={({ isActive }) => linkClass(isActive)}>Missions</NavLink>
-                        <NavLink to="/about" onClick={() => setOpen(false)} className={({ isActive }) => linkClass(isActive)}>About</NavLink>
+                        <NavLink to="/ships" onClick={() => setOpen(false)} className={({ isActive }) => linkClass(isActive)}>Ships</NavLink>
+                        <NavLink to="/statistics" onClick={() => setOpen(false)} className={({ isActive }) => linkClass(isActive)}>Statistics</NavLink>
+                        <NavLink to="/history" onClick={() => setOpen(false)} className={({ isActive }) => linkClass(isActive)}>History</NavLink>
                         <NavLink to="/users" onClick={() => setOpen(false)} className={({ isActive }) => linkClass(isActive)}>Users</NavLink>
-
+                        <NavLink to="/about" onClick={() => setOpen(false)} className={({ isActive }) => linkClass(isActive)}>About</NavLink>
                     </nav>
                 </div>
             )}

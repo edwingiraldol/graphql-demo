@@ -3,7 +3,9 @@ import MainLayout from '../ui/layout/MainLayout';
 import LaunchesPage from '../pages/LaunchesPage';
 import LaunchDetailPage from '../pages/LaunchDetailPage';
 import RocketsPage from '../pages/RocketsPage';
-import MissionsPage from '../pages/MissionsPage';
+import ShipsPage from '../pages/ShipsPage';
+import StatisticsPage from '../pages/StatisticsPage';
+import HistoryPage from '../pages/HistoryPage';
 import AboutPage from '../pages/AboutPage';
 import UsersPage from '../pages/UsersPage';
 
@@ -16,9 +18,11 @@ export default function AppRoutes() {
                     <Route path="/launches" element={<LaunchesPage />} />
                     <Route path="/launch/:id" element={<LaunchDetailPage />} />
                     <Route path="/rockets" element={<RocketsPage />} />
-                    <Route path="/missions" element={<MissionsPage />} />
-                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/ships" element={<ShipsPage />} />
+                    <Route path="/statistics" element={<StatisticsPage />} />
+                    <Route path="/history" element={<HistoryPage />} />
                     <Route path="/users" element={<UsersPage />} />
+                    <Route path="/about" element={<AboutPage />} />
                 </Routes>
             </MainLayout>
         </BrowserRouter>

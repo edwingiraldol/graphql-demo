@@ -2,7 +2,9 @@ import {GET_LAUNCHES} from '../queries/launches.query';
 import {graphqlRequest} from '../graphql/client';
 import {type Launch} from '../../types/launch.types';
 import {GET_ROCKETS} from '../queries/rockets.query';
+import {GET_SHIPS} from '../queries/ships.query';
 import type {Rocket} from '../../types/rocket.types';
+import type {Ship} from '../../types/ship.types';
 
 type FetchLaunchesArgs = {
     year?: string | null;
@@ -10,8 +12,11 @@ type FetchLaunchesArgs = {
     limit?: number;
 };
 
-
 type FetchRocketsArgs = {
+    limit?: number;
+};
+
+type FetchShipsArgs = {
     limit?: number;
 };
 
@@ -91,6 +96,41 @@ export async function fetchRockets({ limit = 100 }: FetchRocketsArgs): Promise<R
                 first_flight: r.first_flight ?? null,
                 description: r.description ?? null,
             } as Rocket;
+        });
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function fetchShips({ limit = 100 }: FetchShipsArgs): Promise<Ship[] | undefined> {
+    try {
+        const data = await graphqlRequest<{ ships: Array<Record<string, unknown>> }>(GET_SHIPS, { limit });
+        const shipsRaw = data?.ships;
+        if (!shipsRaw) return undefined;
+
+        return shipsRaw.map((raw) => {
+            const r = raw as Record<string, any>;
+            return {
+                id: String(r.id ?? ''),
+                name: r.name ?? '',
+                type: r.type ?? null,
+                home_port: r.home_port ?? null,
+                status: r.status ?? null,
+                speed_kn: typeof r.speed_kn === 'number' ? r.speed_kn : null,
+                course_deg: typeof r.course_deg === 'number' ? r.course_deg : null,
+                position: r.position ? {
+                    latitude: typeof r.position.latitude === 'number' ? r.position.latitude : null,
+                    longitude: typeof r.position.longitude === 'number' ? r.position.longitude : null,
+                } : null,
+                successful_landings: typeof r.successful_landings === 'number' ? r.successful_landings : null,
+                attempted_landings: typeof r.attempted_landings === 'number' ? r.attempted_landings : null,
+                missions: Array.isArray(r.missions) ? r.missions.map((m: any) => ({
+                    name: String(m.name ?? ''),
+                    flight: typeof m.flight === 'number' ? m.flight : 0,
+                })) : [],
+                url: r.url ?? null,
+                image: r.image ?? null,
+            } as Ship;
         });
     } catch (err) {
         throw err;
